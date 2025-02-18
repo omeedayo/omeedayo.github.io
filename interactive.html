@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INFPのあだおか - インタラクティブ</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* インタラクティブページ固有のスタイル（.page-content 内のみ） */
+      .page-content .container {
+        max-width: 600px;
+        margin: 80px auto;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        color: #fff;
+      }
+      .page-content .container h2 {
+        margin-bottom: 20px;
+      }
+      .page-content .container button {
+        margin: 5px;
+        padding: 10px 20px;
+        font-size: 1rem;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        background-color: #007BFF;
+        color: #fff;
+        transition: background-color 0.3s;
+      }
+      .page-content .container button:hover {
+        background-color: #0056b3;
+      }
+      .page-content .result {
+        margin-top: 20px;
+        font-size: 1.2rem;
+      }
+      .page-content .shout-message {
+        display: none;
+        margin-top: 20px;
+        font-size: 2rem;
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 共通ヘッダー -->
+    <div class="header">
+      <h2>INFPのあだおか</h2>
+      <nav>
+        <a href="index.html">ホーム</a>
+        <a href="gallery.html">ギャラリー</a>
+        <a href="interactive.html">インタラクティブ</a>
+      </nav>
+    </div>
+
+    <!-- ヒーロー領域 -->
+    <div class="hero">
+      <div class="hero-content">
+        <h1>インタラクティブ</h1>
+      </div>
+    </div>
+
+    <!-- ページ固有のコンテンツ -->
+    <div class="page-content">
+      <!-- あだおか診断セクション -->
+      <div class="container">
+        <h2>状況診断</h2>
+        <p>最近、本当に仕事が嫌すぎる</p>
+        <button onclick="showResult('yes')">はい</button>
+        <button onclick="showResult('no')">いいえ</button>
+        <div id="result" class="result"></div>
+      </div>
+
+      <!-- 叫ぶボタンセクション -->
+      <div class="container">
+        <h2>とりま叫ぶボタン</h2>
+        <button onclick="shout()">叫ぶ</button>
+        <div id="shoutMessage" class="shout-message">無能！</div>
+      </div>
+    </div>
+
+    <script>
+      function showResult(answer) {
+        const resultDiv = document.getElementById("result");
+        if (answer === "yes") {
+          resultDiv.textContent = "生きてるだけで偉いよ！！頑張って！！";
+        } else {
+          resultDiv.textContent = "定時ダッシュ！！";
+        }
+      }
+
+      function shout() {
+        const messageDiv = document.getElementById("shoutMessage");
+        messageDiv.style.display = "block";
+        setTimeout(() => {
+          messageDiv.style.display = "none";
+        }, 2000);
+      }
+    </script>
+  </body>
+</html>

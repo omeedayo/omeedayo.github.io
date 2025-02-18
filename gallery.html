@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INFPのあだおか - ギャラリー</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* ギャラリーページ固有のスタイル（ページ固有コンテンツ内のみ適用） */
+      .page-content .gallery-container {
+        max-width: 1200px;
+        margin: 80px auto;
+        padding: 20px;
+        text-align: center;
+      }
+      .page-content .gallery-group {
+        margin-bottom: 40px;
+      }
+      .page-content .gallery-group h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: #ff69b4;
+      }
+      .page-content .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .page-content .gallery img {
+        width: 220px;
+        height: auto;
+        margin: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .page-content .gallery img:hover {
+        transform: scale(1.1);
+      }
+      .page-content .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 1100;
+      }
+      .page-content .modal img {
+        max-width: 80%;
+        max-height: 80%;
+        border-radius: 20px;
+        box-shadow: 0 10px 20px rgba(255, 255, 255, 0.6);
+      }
+      .page-content .close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 3rem;
+        cursor: pointer;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 10px 15px;
+        border-radius: 50%;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+        transition: background 0.3s;
+      }
+      .page-content .close:hover {
+        background: rgba(255, 0, 0, 0.8);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 共通ヘッダー -->
+    <div class="header">
+      <h2>INFPのあだおか</h2>
+      <nav>
+        <a href="index.html">ホーム</a>
+        <a href="gallery.html">ギャラリー</a>
+        <a href="interactive.html">インタラクティブ</a>
+      </nav>
+    </div>
+
+    <!-- ヒーロー領域 -->
+    <div class="hero">
+      <div class="hero-content">
+        <h1>ギャラリー</h1>
+      </div>
+    </div>
+
+    <!-- ページ固有のコンテンツ -->
+    <div class="page-content">
+      <div class="gallery-container">
+        <div class="gallery-group">
+          <h2>いつものADA</h2>
+          <div class="gallery" id="galleryWithText"></div>
+        </div>
+        <div class="gallery-group">
+          <h2>綺麗目なADA</h2>
+          <div class="gallery" id="galleryWithoutText1"></div>
+        </div>
+        <div class="gallery-group">
+          <h2>IQ３のADA</h2>
+          <div class="gallery" id="galleryWithoutText2"></div>
+        </div>
+      </div>
+
+      <!-- モーダル -->
+      <div class="modal" id="modal">
+        <span class="close" id="close">&times;</span>
+        <img id="modalImg" src="" alt="Gallery Image">
+      </div>
+    </div>
+
+    <script>
+      function createGallery(images, galleryId) {
+        const gallery = document.getElementById(galleryId);
+        images.forEach(img => {
+          let imageElement = document.createElement("img");
+          imageElement.src = img;
+          imageElement.alt = "Gallery Image";
+          imageElement.onclick = function () {
+            document.getElementById("modal").style.display = "flex";
+            document.getElementById("modalImg").src = img;
+          };
+          gallery.appendChild(imageElement);
+        });
+      }
+      createGallery(
+        ["18.png", "10.png", "11.png", "12.png", "13.png", "14.png", "15.png", "16.png", "17.png"],
+        "galleryWithText"
+      );
+      createGallery(
+        ["20.png", "21.png", "22.png", "23.png", "24.png", "25.png", "26.png"],
+        "galleryWithoutText1"
+      );
+      createGallery(
+        ["27.png", "28.png", "29.png", "30.png", "31.png", "32.png"],
+        "galleryWithoutText2"
+      );
+
+      document.getElementById("close").onclick = function () {
+        document.getElementById("modal").style.display = "none";
+      };
+
+      document.getElementById("modal").onclick = function (event) {
+        if (event.target === this) {
+          this.style.display = "none";
+        }
+      };
+    </script>
+  </body>
+</html>
