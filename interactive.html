@@ -278,28 +278,32 @@
 
   let questionHistory = []; // 直近の質問履歴
 
-      function showRandomQuestion() {
-        let categories = Object.keys(questions);
-        let shuffledCategories = shuffle([...categories]); // カテゴリの順番をランダム化
-        let selectedCategory = shuffledCategories[Math.floor(Math.random() * shuffledCategories.length)];
-        let shuffledQuestions = shuffle([...questions[selectedCategory]]); // 質問をシャッフル
+     function showRandomQuestion() {
+    let categories = Object.keys(questions);
+    let shuffledCategories = shuffle([...categories]); 
+    let selectedCategory = shuffledCategories[Math.floor(Math.random() * shuffledCategories.length)];
+    let shuffledQuestions = shuffle([...questions[selectedCategory]]);
 
-        let randomQuestion;
-        do {
-          randomQuestion = shuffledQuestions.pop(); // シャッフル済みのリストから取得
-        } while (questionHistory.includes(randomQuestion) && shuffledQuestions.length > 0);
+    let randomQuestion;
+    do {
+        randomQuestion = shuffledQuestions.pop();
+    } while (questionHistory.includes(randomQuestion) && shuffledQuestions.length > 0);
 
-        // 直近3つの質問は再出現しないようにする
-        questionHistory.push(randomQuestion);
-        if (questionHistory.length > 3) questionHistory.shift();
+    // 直近3つの質問は再出現しないようにする
+    questionHistory.push(randomQuestion);
+    if (questionHistory.length > 3) questionHistory.shift();
 
-        let shuffledReactions = shuffle([...reactions[selectedCategory]]);
-        let randomReaction = shuffledReactions.pop();
+    let shuffledReactions = shuffle([...reactions[selectedCategory]]);
+    let randomReaction = shuffledReactions.pop();
 
-        document.getElementById("question-box").textContent = randomQuestion;
-        document.getElementById("adaoka-reaction").textContent = "（あだおか: " + randomReaction + "）";
-        document.getElementById("adaoka-expression").textContent = "😆";
-      }
+    let shuffledExpressions = shuffle([...expressions[selectedCategory]]);
+    let randomExpression = shuffledExpressions.pop();  // ✅ ここを追加！
+
+    document.getElementById("question-box").textContent = randomQuestion;
+    document.getElementById("adaoka-reaction").textContent = "（あだおか: " + randomReaction + "）";
+    document.getElementById("adaoka-expression").textContent = randomExpression;  // ✅ ここを修正！
+}
+
 
       document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("question-btn").addEventListener("click", showRandomQuestion);
