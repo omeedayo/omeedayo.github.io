@@ -103,12 +103,11 @@
             chatBox.innerHTML += `<p class='user message'>${input}</p>`;
 
             // APIに送信（VercelのデプロイURLに変更）
-            let response = await fetch("https://adaoka-ai-chat.vercel.app/api/chat", { 
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: input })
-            });
-
+        let response = await fetch("https://adaoka-ai-chat.vercel.app/chat", { 
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: input })
+        });
             let data = await response.json();
             chatBox.innerHTML += `<p class='bot message'>あだおか: ${data.reply}</p>`;
 
