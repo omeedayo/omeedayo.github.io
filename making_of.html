@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>制作過程 - INFPのあだおか</title>
+  <style>
+    body {
+      background: #000;          /* 全体の背景を黒 */
+      color: #fff;              /* 文字色は白 */
+      font-family: 'Nunito', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .wrapper {
+      max-width: 900px;         /* 中央に寄せるための最大幅 */
+      margin: 0 auto;           /* 左右マージン自動で中央寄せ */
+      padding: 20px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .header p {
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    /* セクションごとに背景を少しグレー寄りにしてコントラストを付ける */
+    .section {
+      background: #111;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    .section h2 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+      color: #ff69b4; /* ピンクでアクセント */
+    }
+    .section p {
+      line-height: 1.7;   /* 行間を少し広めに */
+      margin-bottom: 15px;
+    }
+    .section img {
+      display: block;
+      margin: 10px auto;
+      max-width: 100%;
+      border-radius: 4px;
+      border: 1px solid #444;
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .back-link a {
+      color: #ff69b4;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>　制作過程（記載中）</h1>
+    
+    <div class="section">
+      <h2>【1日目】AIの作成</h2>
+      <p>私「AI作れたら面白そうだよね～」、 鬼「やってほしいです！」</p>
+      <p>こんな感じのIQ３の雑談をきっかけに、とりあえずやってみることにした。<br>そして、これが地獄の始まりであった…<br>
+        今振り返ってみると、PythonのFlaskにてあだＴのウェブアプリを作成。キャラクターをプロンプトに組み込みつつ、言語処理はGoogleの生成AI「Gemini」のAPIに橋渡しさせて処理させた。<br>
+        …ってことらしい。何を言ってるのかわからないと思うが、俺も何を言ってるのかわからない。</p>
+       
+        
+     <p>【導入】<br>
+        まずはAIを手に入れることにした。厳密にいうとLLM（大規模言語モデル）であり、画像生成とかは出来ないから生成AIの一部の言語部分って感じ。<br>
+        つまり、ディープラーニングなるえっちな技術で作られた言語モデル。ということである。（大嘘）<br>
+        Nomic AIなる会社が開発したGPT4ALLというアプリにローカル環境で動かせるLLMが多数あるということでDLしてみた。</p>
+       <img src="DAY1-1.png" alt="1日目: AI作成の様子" width="500">
+
+    <p>当然のように英語しかなく、当然のように読めないため、諸々調べたところMistral（仏）、LLaMA2（Meta）とかいうのがおすすめらしいのでDL。<br>
+        ここまでで大分苦労したが、四苦八苦しながら初期設定を終わらせ、ここからスクリプトを書き始める。<br>
+
+    　<p>【作成】<br>
+        アプリケーションはPythonのFlaskにて作成とした。<br>
+        キャラクター設定にあたっては過去のあだＴの発言をＧＰＴに分析させて設定を作りこんでみたが、これがなかなか的を得ていて草が生える。</p>
+        <img src="DAY1-2.png" alt="1日目: AI作成の様子" width="500">
+        
+        <p>そして、DLしたプログラムを動かすためのスクリプトをＧＰＴに聞きながら作成する。<br>
+        どうやらパイソンのスクリプトでキャラクターを設定し、その内容をDLしたLLMに読みこませながらAIの回答を出すような形らしい。<br>
+        設定やスクリプトに謎が多すぎてまったく意味不明だが強引に進めていき、数時間トライ＆エラーを繰り返す。<br>
+        そして、とうとう動作が成功する瞬間を迎える・・・！</p>
+        <img src="DAY1-3.png" alt="1日目: AI作成の様子" width="700">
+        <p>いや、ジャニーさんみたいになってるじゃねーか！！！！<br>
+           「人間なんですか？ユー」じゃねーんだよっ<br>
+           どう見ても人間の回答じゃねーのに、なんで人間と思われてるスタンスなんだよ、こいつ。イラっとするわぁ…</p>
+           <p>　</p>
+           <p>…と、まあ文句を言いつつも、一歩前進したと前向きにとらえて修正にとりかかることとした。<br>
+           ＧＰＴに「話がかみ合わないから修正して」と指示したところ、スクリプトのルールの部分に「人の話はちゃんと聞こう」みたいものが追加され、<br>
+           おまえ、小学生じゃないんだから…と不安になりながらも一旦は修正後のスクリプトで起動させてみる。すると… </p>
+           <img src="DAY1-4.png" alt="1日目: AI作成の様子" width="700">
+
+           <p>…うーん、まったく会話がかみ合わないねぇ？<br>
+            とりあえず、キラキラＯＬを見切すの面白いからやめてほしい。続きめっちゃ気になるやん…<br>
+            てかこれ、Q「あだおかは会社で働いてるの？」A「キラキラＯＬ！」って答えようとしてないか？天才かよ…<br>
+            ってなるほど。どうもユーザーからの想定Ｑが出力されてるみたいので、これを修正してみる。
+             </p>
+             <img src="DAY1-5.png" alt="1日目: AI作成の様子" width="700">
+             <p>うん！前よりよくなったけど、くっそイライラするわ、これ！！！<br>
+                なんだ、これ！？前より人間っぽくなったけど、逆にイライラするぞ？<br>
+                草生やしすぎだろ、こいつっ…煽ってきてんじゃねーぞ！再修正だ！！</p>
+
+        
+             <p>　</p>
+             <p>・・・・はい、無理でした～</p>
+             <p>　</p>
+             <p>
+               結局、原因はLLMのスペックが足りないことでした。<br>
+               GPT4ALLで無料で使える軽いLLMだと限界あるみたい。てか、どれも日本語が弱い。<br>
+               そんで、結局ローカルでLLMを使用する場合、pcを起動させておかないとHPのチャットが使えない未来が見える。</p>
+               
+               <p>　</p>
+               <p>【完成】<br>
+               ってことでオンライン上でAPIにて生成AIを使うことにした。<br>
+               有名どころのOpenAIやAnthropic、DeepSeekなどのAPIは全部有料なので、使うのはGoogleの「Gemini」。<br>
+               こっからも時間はかかったんだけど、なんやかんやで上手くいった。<br>
+               ただし、まだアプリはローカルにあるから、このままだとpcを起動させておかないとHPのチャットが使えないのは同じ。<br>
+               こんな感じで１日目にはチャットAIは完成したけど、PC起動に縛られる環境となった。</p>
+               
+               <p>　</p>
+               <p>参考：作成中の様子</p>
+               <img src="DAY1-6.png"  width="700">
+               <p>（笑いすぎなのはエラーじゃないんだよなぁ…）</p>
+
+
+      <!-- ここに1日目の関連画像を挿入 --
+      
+      </p>
+    </div>
+    
+    <div class="section">
+      <h2>【2日目】Vercelでクラウド上からの起動</h2>
+      <p>（記載中）
+      </p>
+      <!-- ここに2日目の関連画像を挿入 -->
+      
+     
+    </div>
+    
+    <div class="back-link">
+      <p><a href="ai_chat.html">← AIチャットに戻る</a></p>
+    </div>
+  </div>
+</body>
+</html>
