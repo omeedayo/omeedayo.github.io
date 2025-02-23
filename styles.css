@@ -88,3 +88,14 @@ body {
   font-size: 16px;
   padding: 20px;
 }
+
+.notice-section {
+  max-width: 800px;  /* セクションの幅を指定 */
+  margin: 20px auto; /* 自動マージンで中央寄せ */
+  text-align: left;  /* 内部テキストは左揃え */
+  padding: 20px;     /* 左側に余白を作って、始まりが真ん中の左側にくるように */
+  background-color: #222;
+  color: #fff;
+  border-radius: 8px;
+}
+
