@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INFPのあだおか - AIチャット</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .chat-container {
+            max-width: 600px;
+            margin: 80px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: #fff;
+            text-align: center;
+        }
+        .chat-box {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            text-align: left;
+        }
+        .message {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            display: inline-block;
+            max-width: 80%;
+        }
+        .user { background: #007BFF; color: white; text-align: right; float: right; }
+        .bot { background: #f1f1f1; color: black; text-align: left; float: left; }
+        .input-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .input-container input {
+            flex: 1;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: none;
+        }
+        .input-container button {
+            padding: 10px 15px;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff69b4;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .input-container button:hover {
+            background-color: #d1478c;
+        }
+    </style>
+</head>
+<body>
+    <!-- 共通ヘッダー -->
+    <div class="header">
+        <h2>INFPのあだおか</h2>
+        <nav>
+            <a href="index.html">ホーム</a>
+            <a href="gallery.html">ギャラリー</a>
+            <a href="interactive.html">インタラクティブ</a>
+            <a href="ai_chat.html">AIチャット</a> <!-- 🔥 AIチャットページ追加 -->
+        </nav>
+    </div>
+
+    <!-- ヒーロー領域 -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>あだおかT（TRUE） AIチャット</h1>
+        </div>
+    </div>
+
+    <!-- AIチャットエリア -->
+    <div class="page-content">
+        <div class="chat-container">
+            <h2>💬 AIチャットルーム</h2>
+            <div class="chat-box" id="chatBox">
+                <p class="bot message">あだおか：・・・</p>
+            </div>
+            <div class="input-container">
+                <input type="text" id="userInput" placeholder="メッセージを入力">
+                <button onclick="sendMessage()">送信</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            let input = document.getElementById("userInput").value;
+            if (!input) return;
+
+            let chatBox = document.getElementById("chatBox");
+            chatBox.innerHTML += `<p class='user message'>${input}</p>`;
+
+            // APIに送信（VercelのデプロイURLに変更）
+            let response = await fetch("https://adaoka-ai-chat.vercel.app/api/chat", { 
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: input })
+            });
+
+            let data = await response.json();
+            chatBox.innerHTML += `<p class='bot message'>あだおか: ${data.reply}</p>`;
+
+            document.getElementById("userInput").value = "";
+            chatBox.scrollTop = chatBox.scrollHeight; // 自動スクロール
+        }
+    </script>
+</body>
+</html>
