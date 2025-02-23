@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         .chat-container {
-            max-width: 600px;
+            max-width: 1100px;
             margin: 80px auto;
             padding: 20px;
             background: rgba(0, 0, 0, 0.6);
@@ -17,7 +17,7 @@
             text-align: center;
         }
         .chat-box {
-            height: 300px;
+            height: 500px;
             overflow-y: auto;
             border: 1px solid #ccc;
             padding: 10px;
@@ -31,6 +31,7 @@
             border-radius: 5px;
             display: inline-block;
             max-width: 80%;
+            clear: both; /* ←これを追加 */
         }
         .user { background: #007BFF; color: white; text-align: right; float: right; }
         .bot { background: #f1f1f1; color: black; text-align: left; float: left; }
@@ -94,26 +95,37 @@
         </div>
     </div>
 
-    <script>
+  <script>
+        // ページが読み込まれたらイベントリスナーを設定
+        window.addEventListener('DOMContentLoaded', () => {
+          const input = document.getElementById("userInput");
+          input.addEventListener("keypress", function(e) {
+            if (e.key === "Enter") {
+              e.preventDefault(); // エンター押下で改行などを防止
+              sendMessage();
+            }
+          });
+        });
+      
         async function sendMessage() {
-            let input = document.getElementById("userInput").value;
-            if (!input) return;
-
-            let chatBox = document.getElementById("chatBox");
-            chatBox.innerHTML += `<p class='user message'>${input}</p>`;
-
-            // APIに送信（VercelのデプロイURLに変更）
-        let response = await fetch("https://adaoka-ai-chat.vercel.app/chat", { 
+          let input = document.getElementById("userInput").value;
+          if (!input) return;
+      
+          let chatBox = document.getElementById("chatBox");
+          chatBox.innerHTML += `<p class='user message'>${input}</p>`;
+      
+          let response = await fetch("https://adaoka-ai-chat.vercel.app/chat", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ message: input })
-        });
-            let data = await response.json();
-            chatBox.innerHTML += `<p class='bot message'>あだおか: ${data.reply}</p>`;
-
-            document.getElementById("userInput").value = "";
-            chatBox.scrollTop = chatBox.scrollHeight; // 自動スクロール
+          });
+          let data = await response.json();
+          chatBox.innerHTML += `<p class='bot message'>あだおか: ${data.reply}</p>`;
+      
+          // エンターでもボタンでも送信後に入力欄をクリア
+          document.getElementById("userInput").value = "";
+          chatBox.scrollTop = chatBox.scrollHeight;
         }
-    </script>
+      </script>
 </body>
 </html>
