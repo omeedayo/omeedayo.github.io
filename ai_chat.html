@@ -5,70 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>INFPのあだおか - AIチャット</title>
   <link rel="stylesheet" href="styles.css">
-  <style>
-    .chat-container {
-      max-width: 1100px;
-      margin: 80px auto;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      color: #fff;
-      text-align: center;
-    }
-    .chat-box {
-      height: 500px;
-      overflow-y: auto;
-      border: 1px solid #ccc;
-      padding: 10px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 5px;
-      text-align: left;
-    }
-    .message {
-      padding: 10px;
-      margin: 5px 0;
-      border-radius: 5px;
-      display: inline-block;
-      max-width: 80%;
-      clear: both;
-    }
-    .user { background: #007BFF; color: white; text-align: right; float: right; }
-    .bot { background: #f1f1f1; color: black; text-align: left; float: left; }
-    .input-container {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .input-container input {
-      flex: 1;
-      padding: 10px;
-      font-size: 1rem;
-      border-radius: 5px;
-      border: none;
-    }
-    .input-container button {
-      padding: 10px 15px;
-      font-size: 1rem;
-      cursor: pointer;
-      border: none;
-      border-radius: 5px;
-      background-color: #ff69b4;
-      color: white;
-      transition: background-color 0.3s;
-    }
-    .input-container button:hover {
-      background-color: #d1478c;
-    }
-    .version-selector {
-      margin-bottom: 20px;
-      text-align: left;
-    }
-    .version-selector label {
-      margin-right: 20px;
-      cursor: pointer;
-    }
-  </style>
 </head>
 <body>
   <!-- 共通ヘッダー -->
@@ -93,29 +29,66 @@
   <div class="page-content">
     <div class="chat-container">
       <h2>💬 AIチャットルーム</h2>
+
       <!-- バージョン選択 -->
       <div class="version-selector">
-        <label>
-          <input type="radio" name="version" value="1.5">
-          1.5 Pro版（性格：クールでスマート（社会性がある））
+        <label class="radio-label">
+          <input type="radio" name="version" value="1.5" class="radio-input">
+          <span class="radio-custom vers-1-5">🧠 1.5 Pro版（知的＆スマート）</span>
         </label>
-        <label>
-          <input type="radio" name="version" value="2.0" checked>
-          2.0 Flash版（性格：通常（IQ3、テンション↑↑、思考回路バグりがち））
+        <label class="radio-label">
+          <input type="radio" name="version" value="2.0" class="radio-input" checked>
+          <span class="radio-custom vers-2-0">🎉 2.0 Flash版（ノリ＆勢い）</span>
         </label>
       </div>
+
+      <!-- チャットボックス -->
       <div class="chat-box" id="chatBox">
         <p class="bot message">あだおか：・・・</p>
       </div>
+
+      <!-- 入力フォーム -->
       <div class="input-container">
         <input type="text" id="userInput" placeholder="メッセージを入力">
-        <button onclick="sendMessage()">召喚👉</button>
+        <button class="summon" onclick="sendMessage()">召喚👉</button>
       </div>
     </div>
   </div>
 
+  <!-- 注意事項 -->
+  <h3>注意事項</h3>
+  <div class="notice-section">
+    <p>
+      ・「エラーが発生しました: 〜」と表示されることがありますが、これは仕様です。<br>
+      （特定の発言内容がGoogleのポリシーに抵触し、システムによってブロックされる場合があります。）<br>
+      ・利用制限（RPM：1分あたりのリクエスト数、RPD：1日あたりのリクエスト数）は、各モデルごとに異なります。<br>
+      ・特に1.5 Pro版は利用制限が厳しく設定されていますが、実際の使用状況によっては制限値以上に利用できる場合もあります。
+    </p>
+    <p>
+      ※制作過程に興味があれば、<a href="making_of.html">こちら</a>をご覧ください。
+    </p>
+  </div>
+
+  <!-- 最新情報 -->
+  <h3>最新情報</h3>
+  <div class="notice-section">
+    <p><strong>【2.0 Flash版】🎉 「IQ3でも生きていける！」いつものテンション爆発モード 🎉</strong><br>
+      まるでエナジードリンクをキメたような、ノリと勢いだけで駆け抜けるあだおか。<br>
+      ただし、仕事はしごでき（ない）ため、定時ダッシュ率は異常に高い。<br>
+      ・新システム「2.0 Flash」採用！いつもの『笑いすぎ祭り』を実現。<br>
+      ・カジュアルに遊べる安心設計！ （RPM:15, RPD:1500）
+    </p>
+
+    <p><strong>【1.5 Pro版】🧠 「社会性？あるよ！」知的でスマートな大人のあだおか 🧠</strong><br>
+      IQ3の暴走モードを卒業し、人間の会話に近づいたバージョン。<br>
+      ただし、笑いの抑制により「ちょっと物足りない？」と感じるかも。<br>
+      ・知的なトーク力がUP！ Gemini 1.5 Pro搭載でスマートな会話に対応。<br>
+      ・超選ばれし者しか遊べない！まるで激戦のライブチケット並の鬼仕様！（RPM:2, RPD:50）
+    </p>
+  </div>
+
+  <!-- スクリプト -->
   <script>
-    // ページが読み込まれたらイベントリスナーを設定
     window.addEventListener('DOMContentLoaded', () => {
       const input = document.getElementById("userInput");
       input.addEventListener("keypress", function(e) {
@@ -125,7 +98,7 @@
         }
       });
     });
-  
+
     async function sendMessage() {
       const versionElems = document.getElementsByName("version");
       let selectedVersion = "2.0";
@@ -135,14 +108,14 @@
           break;
         }
       }
-  
+
       let inputField = document.getElementById("userInput");
       let input = inputField.value;
       if (!input) return;
-  
+
       let chatBox = document.getElementById("chatBox");
       chatBox.innerHTML += `<p class='user message'>${input}</p>`;
-  
+
       let response = await fetch("https://adaoka-ai-chat.vercel.app/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -150,44 +123,10 @@
       });
       let data = await response.json();
       chatBox.innerHTML += `<p class='bot message'>あだおか: ${data.reply}</p>`;
-  
+
       inputField.value = "";
       chatBox.scrollTop = chatBox.scrollHeight;
     }
   </script>
-       <h3>注意事項</h3><!-- 注意事項セクション -->
-    <div class="notice-section">
-     
-      <p>
-          ・「エラーが発生しました: 〜」と表示されることがありますが、これは仕様です。<br>
-          ・（特定の発言内容がGoogleのポリシーに抵触し、システムによってブロックされる場合があります。）<br>
-          ・利用制限（RPM：1分あたりのリクエスト数、RPD：1日あたりのリクエスト数）は、各モデルごとに異なりますのでご注意ください。<br>
-          ・特に1.5 Pro版は利用制限が厳しく設定されています。<br>
-          ただし、制限値はモデル全体の平均値に基づいているため、実際の使用状況によっては、これを超える回数で利用できる場合もあります。<br>
-
-      </p>
-      <p>
-        ※制作過程に興味があれば、<a href="making_of.html">こちら</a>をご覧ください。
-      </p>
-    </div>
-
-　　 <h3>最新情報</h3><!-- 注意事項セクション -->
-    <div class="notice-section">
-     
-      <p>【2.0 Flash版】🔥 「IQ3でも生きていける！」いつものテンション爆発モード 🔥<br>
-          まるでエナジードリンクをキメたような、ノリと勢いだけで駆け抜けるあだおか。<br>
-          ただし、仕事はしごでき（ない）ため、定時ダッシュ率は異常に低い。<br>
-          ・新システム「2.0 Flash」採用！いつもの『笑いすぎ祭り』を実現。<br>
-          ・カジュアルに遊べる安心設計！ （RPM:15, RPD:1500） </p>
-        <p>　</p>
-       <p>【1.5 Pro版】🧠 「社会性？あるよ！」知的でスマートな大人のあだおか 🧠<br>
-        IQ3の暴走モードを卒業し、人間の会話に近づいたバージョン。<br>
-        ただし、笑いの抑制により「ちょっと物足りない？」と感じるかも。<br>
-        ・知的なトーク力がUP！ Gemini 1.5 Pro搭載でスマートな会話に対応。<br>
-        ・超選ばれし者しか遊べない！まるで激戦のライブチケット並の鬼仕様！（RPM:2, RPD:50）</p>
- 
-    </div>
-    
-    
 </body>
 </html>
