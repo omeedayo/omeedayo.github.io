@@ -1,143 +1,169 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INFPのあだおか - AIチャット</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        .chat-container {
-            max-width: 1100px;
-            margin: 80px auto;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            color: #fff;
-            text-align: center;
-        }
-        .chat-box {
-            height: 500px;
-            overflow-y: auto;
-            border: 1px solid #ccc;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
-            text-align: left;
-        }
-        .message {
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-            display: inline-block;
-            max-width: 80%;
-            clear: both; /* ←これを追加 */
-        }
-        .user { background: #007BFF; color: white; text-align: right; float: right; }
-        .bot { background: #f1f1f1; color: black; text-align: left; float: left; }
-        .input-container {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .input-container input {
-            flex: 1;
-            padding: 10px;
-            font-size: 1rem;
-            border-radius: 5px;
-            border: none;
-        }
-        .input-container button {
-            padding: 10px 15px;
-            font-size: 1rem;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            background-color: #ff69b4;
-            color: white;
-            transition: background-color 0.3s;
-        }
-        .input-container button:hover {
-            background-color: #d1478c;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INFPのあだおか - AIチャット</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .chat-container {
+      max-width: 1100px;
+      margin: 80px auto;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      color: #fff;
+      text-align: center;
+    }
+    .chat-box {
+      height: 500px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 5px;
+      text-align: left;
+    }
+    .message {
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+      display: inline-block;
+      max-width: 80%;
+      clear: both;
+    }
+    .user { background: #007BFF; color: white; text-align: right; float: right; }
+    .bot { background: #f1f1f1; color: black; text-align: left; float: left; }
+    .input-container {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .input-container input {
+      flex: 1;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: none;
+    }
+    .input-container button {
+      padding: 10px 15px;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #ff69b4;
+      color: white;
+      transition: background-color 0.3s;
+    }
+    .input-container button:hover {
+      background-color: #d1478c;
+    }
+    .version-selector {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .version-selector label {
+      margin-right: 20px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <!-- 共通ヘッダー -->
-    <div class="header">
-        <h2>INFPのあだおか</h2>
-        <nav>
-            <a href="index.html">ホーム</a>
-            <a href="gallery.html">ギャラリー</a>
-            <a href="interactive.html">インタラクティブ</a>
-            <a href="ai_chat.html">AIチャット</a> <!-- 🔥 AIチャットページ追加 -->
-        </nav>
-    </div>
+  <!-- 共通ヘッダー -->
+  <div class="header">
+    <h2>INFPのあだおか</h2>
+    <nav>
+      <a href="index.html">ホーム</a>
+      <a href="gallery.html">ギャラリー</a>
+      <a href="interactive.html">インタラクティブ</a>
+      <a href="ai_chat.html">AIチャット</a>
+    </nav>
+  </div>
 
-    <!-- ヒーロー領域 -->
-    <div class="hero">
-        <div class="hero-content">
-            <h1>AIチャット　あだT （ver2.0）</h1>
-        </div>
+  <!-- ヒーロー領域 -->
+  <div class="hero">
+    <div class="hero-content">
+      <h1>AIチャット　あだT （ver2.0）</h1>
     </div>
+  </div>
 
-    <!-- AIチャットエリア -->
-    <div class="page-content">
-        <div class="chat-container">
-            <h2>💬 AIチャットルーム</h2>
-            <div class="chat-box" id="chatBox">
-                <p class="bot message">あだおか：・・・</p>
-            </div>
-            <div class="input-container">
-                <input type="text" id="userInput" placeholder="メッセージを入力">
-                <button onclick="sendMessage()">送信</button>
-            </div>
-        </div>
+  <!-- AIチャットエリア -->
+  <div class="page-content">
+    <div class="chat-container">
+      <h2>💬 AIチャットルーム</h2>
+      <!-- バージョン選択 -->
+      <div class="version-selector">
+        <label>
+          <input type="radio" name="version" value="1.5">
+          1.5 Pro版（性格：クールでスマート（社会性がある））
+        </label>
+        <label>
+          <input type="radio" name="version" value="2.0" checked>
+          2.0 Flash版（性格：通常（IQ3、テンション↑↑、思考回路バグりがち））
+        </label>
+      </div>
+      <div class="chat-box" id="chatBox">
+        <p class="bot message">あだおか：・・・</p>
+      </div>
+      <div class="input-container">
+        <input type="text" id="userInput" placeholder="メッセージを入力">
+        <button onclick="sendMessage()">召喚👉</button>
+      </div>
     </div>
+  </div>
 
   <script>
-        // ページが読み込まれたらイベントリスナーを設定
-        window.addEventListener('DOMContentLoaded', () => {
-          const input = document.getElementById("userInput");
-          input.addEventListener("keypress", function(e) {
-            if (e.key === "Enter") {
-              e.preventDefault(); // エンター押下で改行などを防止
-              sendMessage();
-            }
-          });
-        });
-      
-        async function sendMessage() {
-          let input = document.getElementById("userInput").value;
-          if (!input) return;
-      
-          let chatBox = document.getElementById("chatBox");
-          chatBox.innerHTML += `<p class='user message'>${input}</p>`;
-      
-          let response = await fetch("https://adaoka-ai-chat.vercel.app/chat", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: input })
-          });
-          let data = await response.json();
-          chatBox.innerHTML += `<p class='bot message'>あだおか: ${data.reply}</p>`;
-      
-          // エンターでもボタンでも送信後に入力欄をクリア
-          document.getElementById("userInput").value = "";
-          chatBox.scrollTop = chatBox.scrollHeight;
+    // ページが読み込まれたらイベントリスナーを設定
+    window.addEventListener('DOMContentLoaded', () => {
+      const input = document.getElementById("userInput");
+      input.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          sendMessage();
         }
-      </script>
-
+      });
+    });
+  
+    async function sendMessage() {
+      const versionElems = document.getElementsByName("version");
+      let selectedVersion = "2.0";
+      for (let elem of versionElems) {
+        if (elem.checked) {
+          selectedVersion = elem.value;
+          break;
+        }
+      }
+  
+      let inputField = document.getElementById("userInput");
+      let input = inputField.value;
+      if (!input) return;
+  
+      let chatBox = document.getElementById("chatBox");
+      chatBox.innerHTML += `<p class='user message'>${input}</p>`;
+  
+      let response = await fetch("https://adaoka-ai-chat.vercel.app/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: input, version: selectedVersion })
+      });
+      let data = await response.json();
+      chatBox.innerHTML += `<p class='bot message'>あだおか: ${data.reply}</p>`;
+  
+      inputField.value = "";
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
        <h3>注意事項</h3><!-- 注意事項セクション -->
     <div class="notice-section">
      
       <p>
-        ・このAIチャット「あだＴ」は、まじで思いついたことをそのまま話してるので、<br>
-        ときどき「ねぇｗｗｗｗｗちょっとまってｗｗｗｗｗｗｗ」しか言わなくなることがあります。
-        <br>（通称「ねぇまってｗｗｗ」ループ）<br>
-        ・ときどき「エラーが発生しました: 〜」と表示されることがありますがこれは仕様です。<br>
-        （ぶっ飛んだ発言内容が、システムのフィルターに多々引っかかります）。<br>
-        ・利用制限はそれぞれのモデルを参照ください。<br>
+          ・エラーが発生しました: 〜」と表示されることがありますが、これは仕様です。<br>
+          ・（特定の発言内容がGoogleのポリシーに抵触し、システムによってブロックされる場合があります。）<br>
+          ・利用制限（RPM：1分あたりのリクエスト数、RPD：1日あたりのリクエスト数）は、各モデルごとに異なりますのでご注意ください。<br>
+          ・特に1.5 Pro版は利用制限が厳しく設定されています。<br>
+          ただし、制限値はモデル全体の平均値に基づいているため、実際の使用状況によっては、これを超える回数で利用できる場合もあります。<br>
 
       </p>
       <p>
@@ -148,15 +174,17 @@
 　　 <h3>最新情報</h3><!-- 注意事項セクション -->
     <div class="notice-section">
      
-      <p>NEW！【1.5 Pro版】（2025/2/26）<br> 
-             ・キャラクター設定刷新＆Gemini 1.5 Pro搭載で、あの『笑いすぎ祭り』は卒業！<br>
-             ・会話は、まるで隣に座った友達と語り合っているかのようなレベルの高いトークへ進化。<br> 
-             ・複数人アクセス時の混線もすっきり解消！<br>
-             ※RPM:2,RPD;50</p> 
-    　<p>NEW！【2.0 Flash版】（2025/2/26）←現在のモード<br> 
-            ・新システム「2.0 Flash」を採用し、軽快で直感的ないつもの『笑いすぎ祭り』<br>
-            ・複数人同時アクセスによる混線対策も万全で、快適なチャット体験を実現！<br> 
-            ※RPM:15,RPD;1500</p>
+      <p>【2.0 Flash版】🔥 「IQ3でも生きていける！」いつものテンション爆発モード 🔥<br>
+          まるでエナジードリンクをキメたような、ノリと勢いだけで駆け抜けるあだおか。<br>
+          ただし、仕事はしごでき（ない）ため、定時ダッシュ率は異常に低い。<br>
+          ・新システム「2.0 Flash」採用！いつもの『笑いすぎ祭り』を実現。<br>
+          ・カジュアルに遊べる安心設計！ （RPM:15, RPD:1500） </p>
+        <p>　</p>
+       <p>【1.5 Pro版】🧠 「社会性？あるよ！」知的でスマートな大人のあだおか 🧠<br>
+        IQ3の暴走モードを卒業し、人間の会話に近づいたバージョン。<br>
+        ただし、笑いの抑制により「ちょっと物足りない？」と感じるかも。<br>
+        ・知的なトーク力がUP！ Gemini 1.5 Pro搭載でスマートな会話に対応。<br>
+        ・超選ばれし者しか遊べない！まるで激戦のライブチケット並の鬼仕様！（RPM:2, RPD:50）</p>
  
     </div>
     
