@@ -1,78 +1,81 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;600&family=Playfair+Display:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@300;600&display=swap');
 
-/* 全体のリセット */
+/* === リセットと基本 === */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* ルート設定 */
 html {
   font-size: 16px;
   line-height: 1.6;
-  overflow-y: scroll;
   scroll-behavior: smooth;
+  overflow-y: scroll;
 }
 
 body {
-  font-family: 'Nunito', 'Yu Gothic', 'メイリオ', sans-serif;
-  background: #000;
-  color: #fff;
+  font-family: 'Nunito', 'Comic Neue', 'Yu Gothic', 'メイリオ', sans-serif;
+  background: #fdfdfd;
+  color: #333;
   text-align: center;
+  border: 10px solid #f5f5f5;
+  box-sizing: border-box;
 }
 
-/* 固定ヘッダー（グローバル） */
+/* === ヘッダー === */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 80px;
-  padding: 15px 20px;
-  /* background: rgba(0, 0, 0, 0.85); */
-  background: rgba(59, 86, 138, 0.7);
+  height: 70px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 1000;
-  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
-
-
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .header h2 {
-  margin: 0;
+  font-family: 'Comic Neue', cursive;
   font-size: 24px;
   font-weight: 700;
-  position: relative;
-  padding: 0.25em 1em;
-  border-top: solid 2px white;
-  border-bottom: solid 2px white;
-
+  color: #555;
+  letter-spacing: 1px;
 }
 
 .header nav a {
-  color: #fff;
-  margin: 0 15px;
-  text-decoration: none;
-  font-size: 18px;
+  font-family: 'Nunito', sans-serif;
+  color: #333;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 6px 14px;
+  border-radius: 12px;
   font-weight: 600;
-  transition: color 0.3s ease-in-out;
-  background: linear-gradient(transparent 80%, white 70%);
-
+  font-size: 13px;
+  margin: 0 4px;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
 }
 
 .header nav a:hover {
-  color: #ff69b4;
-  text-decoration: underline;
+  background-color: #ff69b4;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 8px rgba(255,105,180,0.3);
 }
 
-/* ヒーローセクション */
+/* === ヒーローセクション === */
 .hero {
-  margin-top: 80px;
-  height: calc(100vh - 80px);
-  background: url('infp.jpg') no-repeat center center;
+  margin-top: 70px;
+  height: calc(100vh - 70px);
+  background: url('infp.png') no-repeat center center;
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -87,37 +90,38 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0);
   z-index: 1;
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
-  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
-  background: linear-gradient(transparent 70%, #a7d6ff 70%);
+  text-shadow: 2px 2px 6px rgba(255, 255, 255, 0.5);
+  background: linear-gradient(transparent 70%, #fff2f7 70%);
 }
 
-/* ページコンテンツ */
+/* === ページコンテンツ === */
 .page-content {
   font-size: 16px;
   padding: 30px 20px;
-  background: rgba(59, 86, 138, 0.7);
+  background: rgba(255, 255, 255, 0.7);
+  color: #333;
 }
 
-/* 通知セクション */
+/* === 通知セクション === */
 .notice-section {
   max-width: 800px;
   margin: 20px auto;
   text-align: left;
   padding: 20px;
-  background: rgba(59, 86, 138, 0.7);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.8);
+  color: #333;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(59, 86, 138, 0.7);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-/* バージョン選択エリア */
+/* === バージョン選択エリア === */
 .version-selector {
   display: flex;
   justify-content: center;
@@ -125,7 +129,6 @@ body {
   margin-bottom: 20px;
 }
 
-/* ボタンのスタイル */
 .radio-label {
   display: flex;
   align-items: center;
@@ -135,12 +138,10 @@ body {
   transition: background 0.3s, color 0.3s;
 }
 
-/* 標準のラジオボタンを非表示 */
 .radio-input {
   display: none;
 }
 
-/* カスタムボタン */
 .radio-custom {
   padding: 10px 20px;
   border-radius: 20px;
@@ -150,40 +151,36 @@ body {
   border: 2px solid transparent;
 }
 
-/* 1.5 Pro版（未選択時） */
 .radio-custom.vers-1-5 {
-  background-color: #99C2FF; /* 薄い青 */
-  color: black;
-  border: 2px solid #007BFF;
+  background-color: #cde3ff;
+  color: #333;
+  border: 2px solid #6ba9ff;
 }
 
-/* 2.0 Flash版（未選択時） */
 .radio-custom.vers-2-0 {
-  background-color: #FFB6C1; /* 薄いピンク */
-  color: black;
+  background-color: #ffd3e6;
+  color: #333;
   border: 2px solid #ff69b4;
 }
 
-/* 1.5 Pro版が選択されたとき */
 .radio-input:checked + .vers-1-5 {
-  background-color: #007BFF; /* 濃い青 */
+  background-color: #131414;
   color: white;
   border: 2px solid white;
 }
 
-/* 2.0 Flash版が選択されたとき */
 .radio-input:checked + .vers-2-0 {
-  background-color: #ff69b4; /* 濃いピンク */
+  background-color: #6ba9ff;
   color: white;
   border: 2px solid white;
 }
 
-/* チャットエリア */
+/* === チャットエリア === */
 .chat-container {
   max-width: 1100px;
   margin: 40px auto;
   padding: 20px;
-  background: rgba(89, 129, 223, 0.7);
+  background: rgba(240, 121, 200, 0.5);
   border-radius: 10px;
   text-align: center;
 }
@@ -191,14 +188,13 @@ body {
 .chat-box {
   height: 500px;
   overflow-y: auto;
-  border: 1px solid #ccc;
+  border: 1px solid #383434;
   padding: 15px;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(235, 119, 196, 0.7);
   border-radius: 5px;
   text-align: left;
 }
 
-/* メッセージのスタイル */
 .message {
   padding: 10px;
   margin: 5px 0;
@@ -209,20 +205,20 @@ body {
 }
 
 .user {
-  background: #007BFF;
-  color: white;
+  background: #a7d6ff;
+  color: black;
   text-align: right;
   float: right;
 }
 
 .bot {
-  background: #f1f1f1;
+  background: #f0f0f0;
   color: black;
   text-align: left;
   float: left;
 }
 
-/* 入力エリア */
+/* === 入力エリア === */
 .input-container {
   display: flex;
   gap: 10px;
@@ -234,9 +230,9 @@ body {
   padding: 12px;
   font-size: 1rem;
   border-radius: 5px;
-  border: 1px solid #fff;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  border: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
 }
 
 .input-container button {
@@ -249,7 +245,6 @@ body {
   font-weight: bold;
 }
 
-/* 送信ボタン */
 .input-container button.summon {
   background-color: #ff69b4;
   color: white;
@@ -259,7 +254,19 @@ body {
   background-color: #d1478c;
 }
 
-/* レスポンシブ対応 */
+/* === フッター === */
+.footer {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  padding: 20px 10px;
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  font-family: 'Nunito', sans-serif;
+}
+
+/* === レスポンシブ === */
 @media screen and (max-width: 768px) {
   .hero {
     height: auto;
@@ -272,6 +279,8 @@ body {
 
   .header {
     height: 70px;
+    flex-direction: column;
+    gap: 5px;
   }
 
   .header h2 {
@@ -279,7 +288,7 @@ body {
   }
 
   .header nav a {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .version-selector {
