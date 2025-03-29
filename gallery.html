@@ -19,7 +19,7 @@
       .page-content .gallery-group h2 {
         font-size: 2rem;
         margin-bottom: 20px;
-        color: white;
+        color: rgb(12, 12, 12);
         background: linear-gradient(transparent 80%, white 70%);
       }
       .page-content .gallery {
@@ -110,6 +110,10 @@
           <h2>通常時（IQ３）のADA</h2>
           <div class="gallery" id="galleryWithoutText2"></div>
         </div>
+        <div class="gallery-group">
+          <h2>その他のADA</h2>
+          <div class="gallery" id="galleryWithoutText3"></div>
+        </div>
       </div>
 
       <!-- モーダル -->
@@ -144,6 +148,10 @@
       createGallery(
         ["27.png", "28.png", "29.png", "30.png", "31.png", "32.png"],
         "galleryWithoutText2"
+      );
+      createGallery(
+        ["33.png", "34.png", "35.png", "36.png", "37.png", "38.png", "39.png", "40.jpg"],
+        "galleryWithoutText3"
       );
 
       document.getElementById("close").onclick = function () {
