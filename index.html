@@ -8,21 +8,34 @@
     <!-- ページ固有のスタイルが必要な場合は .page-content 内で調整 -->
     <style>
       /* 例：ホームページ独自の調整があればここに記述 */
-      .content h2 {
-        font-size: 2rem;
-        color: white;
-      }
+      .page-content h2 {
+  font-family: 'Comic Neue', cursive;
+  font-size: 24px;
+  font-weight: 700;
+  color: #555;  
+  letter-spacing: 1px;
+}
+
+.page-content p {
+  font-family: 'Comic Neue', cursive;
+  font-size: 18px;
+  font-weight: 700;
+  color: #555;
+  letter-spacing: 1px;
+}
+
+
     </style>
   </head>
   <body>
     <!-- 共通ヘッダー -->
     <div class="header">
-      <h2>INFPのあだおか</h2>
+      <h2>Adaoka the INFP</h2>
       <nav>
-        <a href="index.html">ホーム</a>
-        <a href="gallery.html">ギャラリー</a>
-        <a href="interactive.html">インタラクティブ</a>
-        <a href="ai_chat.html">AIチャット</a> <!-- 🔥 AIチャットページ追加 -->
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="interactive.html">Interactive</a>
+        <a href="ai_chat.html">AI Chat</a> <!-- 🔥 AIチャットページ追加 -->
       </nav>
     </div>
 
@@ -37,16 +50,17 @@
     <!-- ページ固有のコンテンツ -->
     <div class="page-content">
       <div class="content">
-        <h2>ヨコシマな世界へようこそ</h2>
+        <h2>Welcome to the Wicked World</h2>
 
         <p>
-          このサイトは、とある会社の一人の同僚をモチーフに生まれたキャラクター "あだおか" をテーマにしたフリーギャラリーです。
+          This site is a free gallery themed around “Adaoka,” a character inspired by one of my coworkers at a certain company.
         </p>
          <p>
-          イラストに著作権はありませんし、彼女には肖像権はありません。
+          There’s no copyright on the illustrations, and she has no right to her likeness.
         </p>
           <p>
-          そして何より私は悪くありません・・・・だって私、悪くないんだからっ！ 
+            And above all, I’m not the bad guy here… Because, you see, I’ve done nothing wrong!
+
         </p>
         
         <div class="button-container">
@@ -55,8 +69,8 @@
     </div>
 
     <!-- フッター -->
-    <footer>
-      <p>&copy; 2025 邪なのはおめぇだよ. All Rights Reserved.</p>
+    <footer class="footer">
+      <p>© 2025 邪なのはおめぇだよ</p>
     </footer>
   </body>
 </html>
