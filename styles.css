@@ -111,17 +111,38 @@ body {
   color: #333;
 }
 
-/* === 通知セクション === */
+.notice-section strong {
+  font-weight: 600; /* 700 → 600程度でやや抑える */
+  color: #444;      /* #333より少し薄い */
+}
+
+
+/* === 注意事項や最新情報を囲むカード風セクション === */
 .notice-section {
   max-width: 800px;
   margin: 20px auto;
   text-align: left;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.8);
+  padding: 15px;                   /* 20px → 15pxに減らす */
+  background: rgba(255, 255, 255, 0.5); /* 派手なグラデーションをやめて半透明白に */
   color: #333;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f1b4d1;       /* ほんのりピンクの枠線は残す */
+  box-shadow: none;               /* 影を消して主張を弱める */
+  line-height: 1.6;
 }
+
+
+/* .notice-section 内の p や strong なども微調整したい場合はお好みで */
+.notice-section p {
+  margin-bottom: 1em;                  /* 文章間に適度な余白 */
+}
+
+.notice-section strong {
+  font-weight: 600; /* 700 → 600程度でやや抑える */
+  color: #444;      /* #333より少し薄い */
+}
+
+
 
 /* === バージョン選択エリア === */
 .version-selector {
