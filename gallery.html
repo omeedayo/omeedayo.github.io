@@ -4,48 +4,98 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>INFPのあだおか - ギャラリー</title>
+    <!-- 共通スタイルシート（必要に応じてリンク） -->
     <link rel="stylesheet" href="styles.css" />
     <style>
-      /* ギャラリーページ固有のスタイル（ページ固有コンテンツ内のみ適用） */
-      .page-content .gallery-container {
+      /* --- ギャラリーページ専用スタイル --- */
+
+      /* ページ全体の背景をパステル系グラデーションに */
+      .page-content {
+        background: linear-gradient(145deg, #ffeaf2, #fff2f7);
+        padding: 60px 20px;
+        color: #333;
+      }
+
+      /* ギャラリーコンテナ（カード風にまとめる） */
+      .gallery-container {
         max-width: 1200px;
-        margin: 80px auto;
-        padding: 20px;
+        margin: 40px auto;
+        padding: 30px 20px;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         text-align: center;
       }
-      .page-content .gallery-group {
+
+      .gallery-group {
         margin-bottom: 40px;
       }
-      .page-content h2 {
-  font-family: 'Comic Neue', cursive;
-  font-size: 24px;
-  font-weight: 700;
-  color: #555;  
-  letter-spacing: 1px;
-}
 
-      .page-content .gallery {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+      .gallery-group h2 {
+        font-family: 'Comic Neue', cursive;
+        font-size: 24px;
+        font-weight: 700;
+        color: #555;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px 3px rgba(255,105,180,0.2);
       }
-      .page-content .gallery img {
+
+      /* ギャラリーをCSS Gridで整列（レスポンシブ対応） */
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+        justify-items: center;
+        align-items: start;
+        padding: 0;
+      }
+
+      /* 各画像カード（.gallery-item） */
+      .gallery-item {
+        position: relative;
         width: 220px;
-        height: auto;
-        margin: 10px;
+        overflow: hidden;
         border-radius: 10px;
-        cursor: pointer;
+        background: #fff;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         transition: transform 0.3s;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
       }
-      .page-content .gallery img:hover {
-        transform: scale(1.1);
+      .gallery-item:hover {
+        transform: translateY(-5px);
       }
-      .page-content .modal {
-        display: none;
-        position: fixed;
+
+      .gallery-item img {
+        width: 100%;
+        display: block;
+      }
+
+      /* ホバー時に表示する半透明オーバーレイ（任意：タイトルなどを表示） */
+      .gallery-item .overlay {
+        position: absolute;
         top: 0;
         left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.4);
+        color: #fff;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .gallery-item:hover .overlay {
+        opacity: 1;
+      }
+
+      /* モーダル（画像拡大表示） */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
         width: 100%;
         height: 100%;
         background: rgba(0, 0, 0, 0.8);
@@ -53,14 +103,20 @@
         align-items: center;
         flex-direction: column;
         z-index: 1100;
+        opacity: 0;
+        transition: opacity 0.3s;
       }
-      .page-content .modal img {
+      .modal.show {
+        display: flex;
+        opacity: 1;
+      }
+      .modal img {
         max-width: 80%;
         max-height: 80%;
         border-radius: 20px;
         box-shadow: 0 10px 20px rgba(255, 255, 255, 0.6);
       }
-      .page-content .close {
+      .close {
         position: absolute;
         top: 20px;
         right: 30px;
@@ -73,7 +129,7 @@
         text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
         transition: background 0.3s;
       }
-      .page-content .close:hover {
+      .close:hover {
         background: rgba(255, 0, 0, 0.8);
       }
     </style>
@@ -86,7 +142,7 @@
         <a href="index.html">Home</a>
         <a href="gallery.html">Gallery</a>
         <a href="interactive.html">Interactive</a>
-        <a href="ai_chat.html">AI Chat</a> <!-- 🔥 AIチャットページ追加 -->
+        <a href="ai_chat.html">AI Chat</a>
       </nav>
     </div>
 
@@ -116,11 +172,10 @@
           <h2>PPT ADA</h2>
           <div class="gallery" id="galleryWithoutText4"></div>
         </div>
-      <div class="gallery-group">
-        <h2>ADA Archives</h2>
-        <div class="gallery" id="galleryWithoutText3"></div>
-      </div>
-
+        <div class="gallery-group">
+          <h2>ADA Archives</h2>
+          <div class="gallery" id="galleryWithoutText3"></div>
+        </div>
       </div>
 
       <!-- モーダル -->
@@ -131,25 +186,43 @@
     </div>
 
     <script>
+      // 画像一覧をカード要素で生成する関数
       function createGallery(images, galleryId) {
         const gallery = document.getElementById(galleryId);
         images.forEach(img => {
+          // カードのラッパー要素
+          let item = document.createElement("div");
+          item.className = "gallery-item";
+  
+          // 画像要素
           let imageElement = document.createElement("img");
           imageElement.src = img;
           imageElement.alt = "Gallery Image";
-          imageElement.onclick = function () {
-            document.getElementById("modal").style.display = "flex";
+  
+          // オーバーレイ（必要ならタイトルや説明を設定）
+          let overlay = document.createElement("div");
+          overlay.className = "overlay";
+          overlay.textContent = ""; // 必要に応じてテキストを追加
+  
+          // クリック時にモーダルで拡大表示
+          item.onclick = function () {
+            document.getElementById("modal").classList.add("show");
             document.getElementById("modalImg").src = img;
           };
-          gallery.appendChild(imageElement);
+  
+          item.appendChild(imageElement);
+          item.appendChild(overlay);
+          gallery.appendChild(item);
         });
       }
+  
+      // 各ギャラリーに画像を設定
       createGallery(
         ["18.png", "10.png", "11.png", "12.png", "13.png", "14.png", "15.png", "16.png", "17.png"],
         "galleryWithText"
       );
       createGallery(
-        ["20.png", "21.png", "22.png", "23.png", "24.png", "25.png", "26.png", ],
+        ["20.png", "21.png", "22.png", "23.png", "24.png", "25.png", "26.png"],
         "galleryWithoutText1"
       );
       createGallery(
@@ -164,14 +237,14 @@
         ["33.png", "34.png", "35.png", "36.png", "37.png", "38.png", "39.png", "40.jpg"],
         "galleryWithoutText3"
       );
-
+  
+      // モーダルの閉じる処理
       document.getElementById("close").onclick = function () {
-        document.getElementById("modal").style.display = "none";
+        document.getElementById("modal").classList.remove("show");
       };
-
       document.getElementById("modal").onclick = function (event) {
         if (event.target === this) {
-          this.style.display = "none";
+          document.getElementById("modal").classList.remove("show");
         }
       };
     </script>
