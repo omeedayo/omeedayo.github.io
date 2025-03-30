@@ -16,12 +16,14 @@
       .page-content .gallery-group {
         margin-bottom: 40px;
       }
-      .page-content .gallery-group h2 {
-        font-size: 2rem;
-        margin-bottom: 20px;
-        color: rgb(12, 12, 12);
-        background: linear-gradient(transparent 80%, white 70%);
-      }
+      .page-content h2 {
+  font-family: 'Comic Neue', cursive;
+  font-size: 24px;
+  font-weight: 700;
+  color: #555;  
+  letter-spacing: 1px;
+}
+
       .page-content .gallery {
         display: flex;
         flex-wrap: wrap;
@@ -79,19 +81,19 @@
   <body>
     <!-- 共通ヘッダー -->
     <div class="header">
-      <h2>INFPのあだおか</h2>
+      <h2>Adaoka the INFP</h2>
       <nav>
-        <a href="index.html">ホーム</a>
-        <a href="gallery.html">ギャラリー</a>
-        <a href="interactive.html">インタラクティブ</a>
-        <a href="ai_chat.html">AIチャット</a>  
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="interactive.html">Interactive</a>
+        <a href="ai_chat.html">AI Chat</a> <!-- 🔥 AIチャットページ追加 -->
       </nav>
     </div>
 
     <!-- ヒーロー領域 -->
     <div class="hero">
       <div class="hero-content">
-        <h1>ギャラリー</h1>
+        <h1>Gallery</h1>
       </div>
     </div>
 
@@ -99,21 +101,26 @@
     <div class="page-content">
       <div class="gallery-container">
         <div class="gallery-group">
-          <h2>INFPのADA</h2>
+          <h2>Dreamy ADA</h2>
           <div class="gallery" id="galleryWithText"></div>
         </div>
         <div class="gallery-group">
-          <h2>綺麗目のADA</h2>
+          <h2>Elegant ADA</h2>
           <div class="gallery" id="galleryWithoutText1"></div>
         </div>
         <div class="gallery-group">
-          <h2>通常時（IQ３）のADA</h2>
+          <h2>Derpy ADA</h2>
           <div class="gallery" id="galleryWithoutText2"></div>
         </div>
         <div class="gallery-group">
-          <h2>その他のADA</h2>
-          <div class="gallery" id="galleryWithoutText3"></div>
+          <h2>PPT ADA</h2>
+          <div class="gallery" id="galleryWithoutText4"></div>
         </div>
+      <div class="gallery-group">
+        <h2>ADA Archives</h2>
+        <div class="gallery" id="galleryWithoutText3"></div>
+      </div>
+
       </div>
 
       <!-- モーダル -->
@@ -142,12 +149,16 @@
         "galleryWithText"
       );
       createGallery(
-        ["20.png", "21.png", "22.png", "23.png", "24.png", "25.png", "26.png"],
+        ["20.png", "21.png", "22.png", "23.png", "24.png", "25.png", "26.png", ],
         "galleryWithoutText1"
       );
       createGallery(
         ["27.png", "28.png", "29.png", "30.png", "31.png", "32.png"],
         "galleryWithoutText2"
+      );
+      createGallery(
+        ["41.png", "42.png", "43.png", "44.png"],
+        "galleryWithoutText4"
       );
       createGallery(
         ["33.png", "34.png", "35.png", "36.png", "37.png", "38.png", "39.png", "40.jpg"],
