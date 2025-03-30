@@ -6,61 +6,107 @@
     <title>INFPのあだおか - インタラクティブ</title>
     <link rel="stylesheet" href="styles.css" />
     <style>
-      /* インタラクティブページ固有のスタイル（.page-content 内のみ） */
+      /* === インタラクティブページ専用の追加/上書きスタイル === */
+      .page-content {
+        /* ほのかな白背景を踏襲。お好みで変えてもOK */
+        font-size: 16px;
+        padding: 30px 20px;
+        background: rgba(255, 255, 255, 0.7);
+        color: #333;
+      }
+
+      /* 各コンテナカード */
       .page-content .container {
         max-width: 600px;
-        margin: 80px auto;
+        margin: 40px auto;                     /* 上部余白を少し抑えめに */
         padding: 20px;
-        background: rgba(0, 0, 0, 0.6);
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        color: #fff;
+        /* チャットエリアと同系統のパステル+立体感 */
+        background: linear-gradient(145deg, #ffeaf2, #fff2f7);
+        border: 1px solid #f1b4d1;             /* ほんのりピンクの枠線 */
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        text-align: center;
       }
+
       .page-content .container h2 {
         margin-bottom: 20px;
+        font-size: 1.5rem;
+        color: #333;                           /* 読みやすくやや濃い文字色 */
+        letter-spacing: 1px;
       }
+
+      .page-content .container p {
+        margin-bottom: 10px;
+        font-size: 1rem;
+        color: #555;                           /* 少し薄めの文字色 */
+      }
+
+      /* ボタン */
       .page-content .container button {
         margin: 5px;
         padding: 10px 20px;
         font-size: 1rem;
         cursor: pointer;
         border: none;
-        border-radius: 5px;
-        background-color: #007BFF;
+        border-radius: 8px;
+        background-color: #ff69b4;            /* アクセントピンク */
         color: #fff;
-        transition: background-color 0.3s;
+        font-weight: bold;
+        transition: background-color 0.3s, transform 0.2s;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       }
       .page-content .container button:hover {
-        background-color: #0056b3;
+        background-color: #d1478c;            /* 少し濃いめのピンク */
+        transform: translateY(-2px);
       }
+
+      /* 診断結果・叫び声などのテキスト */
       .page-content .result {
         margin-top: 20px;
         font-size: 1.2rem;
+        color: #333;                          /* はっきり読ませる色 */
       }
       .page-content .shout-message {
         display: none;
         margin-top: 20px;
         font-size: 2rem;
-        color: red;
+        color: #e62e2e;                       /* やや濃いめの赤 */
+        font-weight: bold;
+      }
+
+      /* よくある質問 */
+      #question-box {
+        margin-top: 10px;
+        font-size: 1rem;
+        color: #444;
+      }
+      #adaoka-reaction {
+        margin-top: 10px;
+        font-style: italic;
+        color: #ff85a2;                      /* 薄いピンク寄りの文字色 */
+      }
+      #adaoka-expression {
+        margin-top: 10px;
+        font-size: 24px;
       }
     </style>
   </head>
   <body>
     <!-- 共通ヘッダー -->
     <div class="header">
-      <h2>INFPのあだおか</h2>
+      <h2>Adaoka the INFP</h2>
       <nav>
-        <a href="index.html">ホーム</a>
-        <a href="gallery.html">ギャラリー</a>
-        <a href="interactive.html">インタラクティブ</a>
-        <a href="ai_chat.html">AIチャット</a>  
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="interactive.html">Interactive</a>
+        <a href="ai_chat.html">AI Chat</a>
       </nav>
     </div>
 
     <!-- ヒーロー領域 -->
     <div class="hero">
       <div class="hero-content">
-        <h1>インタラクティブ</h1>
+        <h1>Interactive</h1>
       </div>
     </div>
 
@@ -81,11 +127,12 @@
         <button onclick="shout()">叫ぶ</button>
         <div id="shoutMessage" class="shout-message">無能！</div>
       </div>
-      
+
+      <!-- よくある質問箱 -->
       <div class="container">
         <h2>👉よくある質問箱👉</h2>
         <div id="question-box">ここに質問が表示されるよ！</div>
-        <div id="adaoka-reaction" style="margin-top: 10px; font-style: italic; color: #ff85a2;">
+        <div id="adaoka-reaction">
           （あだおか：なんだこれ...）
         </div>
         <div id="adaoka-expression" style="margin-top: 10px; font-size: 24px;">😐</div>
@@ -97,7 +144,7 @@
       function showResult(answer) {
         const resultDiv = document.getElementById("result");
         if (answer === "yes") {
-      resultDiv.textContent = "もう頑張らなくていいよ！とりま皆〇ししよ！";
+          resultDiv.textContent = "もう頑張らなくていいよ！とりま皆◯ししよ！";
         } else {
           resultDiv.textContent = "定時ダッシュ！！";
         }
@@ -110,8 +157,9 @@
           messageDiv.style.display = "none";
         }, 2000);
       }
-   // 🔄 シャッフル関数（リストをランダム化する）
-            function shuffle(array) {
+
+      // 🔄 シャッフル関数（リストをランダム化する）
+      function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           [array[i], array[j]] = [array[j], array[i]];
