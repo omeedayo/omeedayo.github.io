@@ -79,14 +79,12 @@ body {
 /* === ヒーローセクション === */
 .hero {
   margin-top: 70px;
-  height: 320px;
-  background: url('infp.png') no-repeat center top;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center top;
+  height: calc(100vh - 70px);
+  background: url('infp.png') no-repeat center center;
+  background-size: cover;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   position: relative;
 }
 
@@ -332,9 +330,9 @@ body {
   }
 
   .hero {
-    height: 260px;
+    height: auto;
+    padding: 40px 0;
     background-size: contain;
-    background-position: center top;
   }
 
   .page-content {
